@@ -1,0 +1,29 @@
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgb(185, 198, 199);
+  padding: 20px;
+  box-shadow: 30px -15px 11px 1px rgba(198, 204, 208, 0.6);
+}
+
+.userForm__label {
+  color: #fff;
+  font-size: 24px;
+}
+
+.forms__input {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+}
+
+.forms__btn {
+  border-radius: 10px;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+}
