@@ -4,6 +4,7 @@ import { Form } from './components/Form/Form'
 import './App.css';
 import { useCallback, useEffect, useState } from 'react';
 import { AUTHORS } from './components/constants';
+import { ChatUi } from './components/ChatUi/ChatUi';
 
 
 
@@ -43,11 +44,17 @@ function App() {
     <div className="App">
       <header className="App-header">
           <Message name={someName}/>
-
-          <Form onSendMessage={handleSendMessage} />
-      <MessageList messages={messages}/>
       </header>
-      
+      <div className="chat__area">
+          <ChatUi/>
+          <div className="chat__box">
+              <Form onSendMessage={handleSendMessage} />
+              <div className="box__message">
+                <MessageList messages={messages}/>
+              </div>
+              
+         </div>
+      </div>
       
       
       

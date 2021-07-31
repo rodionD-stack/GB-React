@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { AUTHORS } from '../constants';
 import './Form.css';
+import { Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+
 export const Form = ({onSendMessage}) => {
 
     const [value, setValue] = useState('');
@@ -23,15 +26,25 @@ export const Form = ({onSendMessage}) => {
         setValue('');
     }
 
+    //Автофокус на инпут при старте страницы и после отправки сообщения при нажатии на кнопку
+    const searchInput = useRef(null);
+
+     useEffect(() => {
+        searchInput.current.focus();
+    }, [])
+
+     function handleFocus() {
+        searchInput.current.focus();
+    }
+
     
     return (
         
-        <form className="forms" onSubmit={handleSubmit} >
-            <label className="forms__label">Write your text:</label>
-            <input className="forms__input" type='text' value={value} onChange={handleChange}  placeholder='...'></input>
-        
-            <input className="forms__btn" type="submit" />
+        <form className="forms"  onSubmit={handleSubmit} ref={handleFocus} >
+            
+            <TextField className="chageInput"  id="outlined-basic" inputRef={searchInput} value={value} onChange={handleChange} label="Type message..." variant="outlined" />
 
+            <Button style={{marginTop:"20px"}}  type="submit" variant="contained" color="primary">Send</Button>
 
             
         </form>
