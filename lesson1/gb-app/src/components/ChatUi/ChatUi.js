@@ -8,6 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import './ChatUi.css'
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,49 +21,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const myChats = [
-  {
-    name: 'Mark chat',
-    id: '1',
-    text: "— I'll be in your neighborhood doing errands this…",
-  },
 
-  {
-    name: 'Rodion chat',
-    id: '2',
-    text: "— Wish I could come, but I'm out of town this…",
-  },
-];
-
-export const ChatUi = () => {
+export const ChatUi = ({ chats }) => {
   const classes = useStyles();
 
   return (
     <List className={classes.root}>
-      {myChats.map((c) => (
+      {Object.values(chats).map((c) => (
         <ListItem alignItems="flex-start" key={c.id}>
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={c.name}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  Ali Connors
-                </Typography>
-                {c.text}
-              </React.Fragment>
-            }
-          />
+          <Link to={`/home/${c.id}`}>{c.name}</Link>
         </ListItem> 
       ))}
-      <Divider variant="inset" component="li" />
     </List>
   );
 }
