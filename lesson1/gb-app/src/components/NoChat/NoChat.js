@@ -3,7 +3,7 @@ import { ChatUi } from "../ChatUi/ChatUi"
 
 export const NoChat = () => (
     <>
-    <ChatUi/>
+    <ChatUi chats='chats'/>
     <span>Please select a chat</span>
     </>
     )

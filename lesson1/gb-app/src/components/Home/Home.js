@@ -2,10 +2,10 @@ import { Message } from '../../Message';
 import { MessageList } from '../MessageList/MessageList';
 import { Form } from '../Form/Form';
 import './Home.css';
-import { useCallback, useEffect, useState } from 'react';
-import { AUTHORS } from '../constants';
 import { ChatUi } from '../ChatUi/ChatUi';
 import { Redirect, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { AUTHORS } from '../constants';
 
 
 const initialChats = {
@@ -22,56 +22,64 @@ const initialChats = {
     chat3: {name: 'Victory Chat', id: 'chat3', messages: []},
 }
 
+
 function Home() {
   
   const someName = 'GeekBrains'
 
+  const [chats, setChats] = useState(initialChats);
   const {chatId} = useParams();
 
   //const [messages, setMessages] = useState([]);
 
-  const [chats, setChats] = useState(initialChats);
-
   const handleSendMessage = useCallback((newMessage) => {
-   // setMessages([...messages, newMessage]);
-   setChats({
-       ...chats,
-       [chatId]: {
-           ...chats[chatId],
-           messages: [...chats[chatId].messages, newMessage]
-       },
-   });
+    // setMessages([...messages, newMessage]);
+    setChats({
+        ...chats,
+        [chatId]: {
+            ...chats[chatId],
+            messages: [...chats[chatId].messages, newMessage]
+        },
+    });
+ 
+   }, [chats, chatId]);
+ 
+   useEffect(() => {
 
-  }, [chats, chatId]);
-
-  useEffect(() => {
-    if (
-        !chatId ||
-        !chats[chatId]?.messages.length || 
-            chats[chatId]?.messages[chats[chatId]?.messages.length - 1].author === AUTHORS.robot
-        
-    ){
-      return;
-    } 
-
-    const timeOut = setTimeout(() => {
-
-      const newMessage = {
-        text: 'I am a robot',
-        author: AUTHORS.robot,
-        id: Date.now(),
-      }
-      handleSendMessage(newMessage);
-
-    }, 1500);
+    if (!chats[chatId]) {
+        return (
+        <Redirect to="/nochat" />
+        )};
     
-    return () => clearTimeout(timeOut);
+ 
+     if (
+         !chatId ||
+         !chats[chatId]?.messages.length || 
+             chats[chatId]?.messages[chats[chatId]?.messages.length - 1].author === AUTHORS.robot
+         
+     ){
+       return;
+     } 
+ 
+     const timeOut = setTimeout(() => {
+ 
+       const newMessage = {
+         text: 'I am a robot',
+         author: AUTHORS.robot,
+         id: Date.now(),
+       }
+       handleSendMessage(newMessage);
+ 
+     }, 1500);
+     
+     return () => clearTimeout(timeOut);
+ 
+   }, [chats]);
 
-  }, [chats]);
-
-  if (!chats[chatId]) {
-    return (<Redirect to="/nochat" />);
-    }
+//    if (!chats[chatId]) {
+//     return (
+//     <Redirect to="/nochat" />
+//     )};
 
   return (
     <div className="Home">
@@ -80,13 +88,13 @@ function Home() {
       </header>
       <div className="chat__area">
           <ChatUi chats={chats} chatId={chatId}/>
-          {!!chatId && <div className="chat__box">
+          {!!chatId && !!initialChats[chatId] && (<div className="chat__box">
               <Form onSendMessage={handleSendMessage} />
               <div className="box__message">
                 <MessageList messages={chats[chatId].messages}/>
               </div>
               
-         </div>}
+         </div>)}
       </div>  
     </div>
   );

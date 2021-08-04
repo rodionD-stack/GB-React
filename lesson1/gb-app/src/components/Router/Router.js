@@ -1,10 +1,12 @@
-import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { BrowserRouter, Link, Switch, Route, useParams, Redirect } from 'react-router-dom';
 import Home from '../Home/Home';
 import { NoChat } from '../NoChat/NoChat';
 import { Profile } from '../Profile/Profile';
 
+
 export const Router = () => {
-   
+
     return (
         <BrowserRouter>
             <ul>
@@ -21,7 +23,9 @@ export const Router = () => {
                     <Profile match={data.match}/>
                 )}>
                 </Route>
-                <Route path="/home/:chatId?"><Home/></Route>
+                <Route path="/home/:chatId?">
+                    <Home/>
+                    </Route>
                 <Route path="/" exact>
                     <h2>WELCOME</h2>
                 </Route>
