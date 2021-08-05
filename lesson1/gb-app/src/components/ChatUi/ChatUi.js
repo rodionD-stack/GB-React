@@ -29,7 +29,7 @@ export const ChatUi = ({ chats }) => {
     <List className={classes.root}>
       {Object.values(chats).map((c) => (
         <ListItem alignItems="flex-start" key={c.id}>
-          <Link to={`/home/${c.id}`}>{c.name}</Link>
+          <Link to={`/chat/${c.id}`}>{c.name}</Link>
         </ListItem> 
       ))}
     </List>
