@@ -12,7 +12,7 @@ function Home() {
   return (
     <div className='home'>
       
-      <h2>Home</h2>
+      <h2 className="home__heading">Home</h2>
     
   </div>
   )
