@@ -9,9 +9,14 @@ import { AUTHORS } from '../constants';
 
 
 function Home() {
-  return <span>
-    Home
-  </span>
+  return (
+    <div className='home'>
+      
+      <h2>Home</h2>
+    
+  </div>
+  )
+  
 
  }
 

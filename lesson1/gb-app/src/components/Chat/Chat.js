@@ -6,18 +6,23 @@ import { ChatUi } from '../ChatUi/ChatUi';
 import { Redirect, useParams } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { AUTHORS } from '../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendMessage } from '../../store/chats/actions';
+import './Chat.css';
 
 
-export const Chat = ({ chats, onAddMessage }) => {
+export const Chat = ({ onAddMessage }) => {
     const someName = 'GeekBrains'
 
   
   const {chatId} = useParams();
+  const  chats = useSelector(state => state.chats);
+  const dispatch = useDispatch();
 
   //const [messages, setMessages] = useState([]);
 
   const handleSendMessage = useCallback((newMessage) => {
-    onAddMessage(newMessage, chatId);
+    dispatch(sendMessage(chatId, newMessage));
   }, [chatId, onAddMessage]);
  
    useEffect(() => {
@@ -62,7 +67,6 @@ export const Chat = ({ chats, onAddMessage }) => {
               <div className="box__message">
                 <MessageList messages={chats[chatId].messages}/>
               </div>
-              
          </div>)}
       </div>  
     </div>

@@ -1,29 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PROFILE_NAME_SHOW, PROFILE_TOGGLE_SHOW } from '../../store/actionTypes';
+import { changeName } from '../../store/profile/actions';
+import { selectName } from '../../store/profile/selectors'; 
+import { PROFILE_SET_NAME, PROFILE_TOGGLE_SHOW } from '../../store/profile/actionTypes';
 
 
 export const Profile = () => {
-    const profileState = useSelector((state) => state);
-    const dispatch = useDispatch();
+    const [value, setValue] = useState("");
+  const name = useSelector(selectName);
+  const dispatch = useDispatch();
 
-    const toggleShow = () => {
-        dispatch({
-            type: PROFILE_TOGGLE_SHOW,
-        });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(changeName(value));
+    setValue("");
+  };
 
-    console.log(profileState);
-    return (
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  return (
     <>
-        <h2>THIS IS PROFILE</h2>
-        <span>Сlick on the checkbox to see the name</span>
-        <input 
-            type='checkbox'
-            onChange={toggleShow}
-        />
-        {profileState.show && <div>{profileState.name}</div>}
-
+      <h2>THIS IS PROFILE OF {name}</h2>
+      <form action="" onSubmit={handleSubmit}>
+        <input value={value} onChange={handleChange} />
+        <button onClick={handleSubmit}>Save name</button>
+      </form>
     </>
-    );
+  );
 };
+
+export default Profile;

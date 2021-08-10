@@ -5,6 +5,7 @@ import { NoChat } from '../NoChat/NoChat';
 import { Profile } from '../Profile/Profile';
 import { AUTHORS } from '../constants';
 import { Chat } from '../Chat/Chat';
+import './Router.css';
 
 const initialChats = {
     chat1: {
@@ -36,14 +37,14 @@ export const Router = () => {
 
     return (
         <BrowserRouter>
-            <ul>
-                <li>
+            <ul className='routerNav'>
+                <li className='navItem'>
                     <Link to="/home">HOME</Link>
                 </li>
-                <li>
+                <li className='navItem'>
                     <Link to="/profile">PROFILE</Link>
                 </li>
-                <li>
+                <li className='navItem'>
                     <Link to="/chat">CHAT</Link>
                 </li>
 
