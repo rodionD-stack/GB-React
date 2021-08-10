@@ -1,8 +1,9 @@
+import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeName } from '../../store/profile/actions';
 import { selectName } from '../../store/profile/selectors'; 
-import { PROFILE_SET_NAME, PROFILE_TOGGLE_SHOW } from '../../store/profile/actionTypes';
+import './Profile.css';
 
 
 export const Profile = () => {
@@ -21,13 +22,13 @@ export const Profile = () => {
   };
 
   return (
-    <>
-      <h2>THIS IS PROFILE OF {name}</h2>
-      <form action="" onSubmit={handleSubmit}>
-        <input value={value} onChange={handleChange} />
-        <button onClick={handleSubmit}>Save name</button>
+    <div className="profile">
+      <h2 className="profile__heading">THIS IS PROFILE OF <span className="heading__name">{name}</span></h2>
+      <form className="forms" action="" onSubmit={handleSubmit}>
+        <TextField value={value} onChange={handleChange} id="outlined-basic" label="Type name..." variant="outlined" />
+        <Button style={{marginTop:"20px"}} onClick={handleSubmit} variant="contained" color="primary">Save name</Button>
       </form>
-    </>
+    </div>
   );
 };
 

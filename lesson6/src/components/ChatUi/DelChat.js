@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { delChat } from "../../store/chats/actions";
 
@@ -9,6 +10,6 @@ export const DelChat = ({chatId}) => {
   }
 
     return (
-        <button onClick={handleDelete} value={chatId}>Delete</button>
+        <Button onClick={handleDelete} value={chatId} variant="contained" color="primary">Delete</Button>
     )
 }

@@ -47,7 +47,6 @@ export const Router = () => {
                 <li className='navItem'>
                     <Link to="/chat">CHAT</Link>
                 </li>
-
             </ul>
 
             <Switch>
