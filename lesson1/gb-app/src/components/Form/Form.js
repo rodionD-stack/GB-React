@@ -1,20 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { AUTHORS } from '../constants';
 import './Form.css';
 import { Button } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
+import { AUTHORS } from '../constants';
 
 export const Form = ({onSendMessage}) => {
 
     const [value, setValue] = useState('');
 
-
     const handleChange = (e) => {
         setValue(e.target.value);
         
     }
-
 
     const handleSubmit = (e) => { 
         e.preventDefault();

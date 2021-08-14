@@ -13,6 +13,7 @@ const initialState = {
         id: 'chat2',
 },
     chat3: {name: 'Victory Chat', id: 'chat3', messages: []},
+
 };
 
 export const chatsReducer = (state = initialState, {type, payload}) => {

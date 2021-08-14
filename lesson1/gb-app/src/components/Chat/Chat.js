@@ -7,7 +7,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { AUTHORS } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { sendMessage } from '../../store/chats/actions';
+import { sendMessage, sendMessageWithReply } from '../../store/chats/actions';
 import './Chat.css';
 
 
@@ -22,33 +22,33 @@ export const Chat = ({ onAddMessage }) => {
   //const [messages, setMessages] = useState([]);
 
   const handleSendMessage = useCallback((newMessage) => {
-    dispatch(sendMessage(chatId, newMessage));
+    dispatch(sendMessageWithReply(chatId, newMessage));
   }, [chatId, onAddMessage]);
  
-   useEffect(() => {
-     if (
-         !chatId ||
-         !chats[chatId]?.messages.length || 
-             chats[chatId]?.messages[chats[chatId]?.messages.length - 1].author === AUTHORS.robot
+  //  useEffect(() => {
+  //    if (
+  //        !chatId ||
+  //        !chats[chatId]?.messages.length || 
+  //            chats[chatId]?.messages[chats[chatId]?.messages.length - 1].author === AUTHORS.robot
          
-     ){
-       return;
-     } 
+  //    ){
+  //      return;
+  //    } 
  
-     const timeOut = setTimeout(() => {
+  //    const timeOut = setTimeout(() => {
  
-       const newMessage = {
-         text: 'I am a robot',
-         author: AUTHORS.robot,
-         id: Date.now(),
-       }
-       handleSendMessage(newMessage);
+  //      const newMessage = {
+  //        text: 'I am a robot',
+  //        author: AUTHORS.robot,
+  //        id: Date.now(),
+  //      }
+  //      handleSendMessage(newMessage);
  
-     }, 1500);
+  //    }, 1500);
      
-     return () => clearTimeout(timeOut);
+  //    return () => clearTimeout(timeOut);
  
-   }, [chats, chatId, handleSendMessage]);
+  //  }, [chats, chatId, handleSendMessage]);
 
    if (!chats[chatId]) {
     return (

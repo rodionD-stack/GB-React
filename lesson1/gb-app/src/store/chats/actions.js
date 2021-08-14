@@ -1,3 +1,4 @@
+import { AUTHORS } from "../../components/constants";
 import { ADD_CHAT, DELETE_CHAT, SEND_MESSAGE } from "./actionTypes";
 
 export const addChat = (chatId, name) => ({
@@ -21,4 +22,18 @@ export const delChat = (chatId) => ({
     payload: {
         chatId,
     }
-})
+});
+
+let timeOut;
+
+export const sendMessageWithReply = (chatId, message) => (dispatch) => {
+    dispatch(sendMessage(chatId, message));
+
+    if (timeOut) {
+        clearTimeout(timeOut);
+    }
+
+   timeOut = setTimeout(() => {
+        dispatch(sendMessage(chatId, {author: AUTHORS.robot, text: 'Message from thunk'}))
+    }, 1500);
+}
