@@ -19,41 +19,15 @@ export const Chat = ({ onAddMessage }) => {
   const  chats = useSelector(state => state.chats);
   const dispatch = useDispatch();
 
-  //const [messages, setMessages] = useState([]);
-
   const handleSendMessage = useCallback((newMessage) => {
     dispatch(sendMessageWithReply(chatId, newMessage));
   }, [chatId, onAddMessage]);
  
-  //  useEffect(() => {
-  //    if (
-  //        !chatId ||
-  //        !chats[chatId]?.messages.length || 
-  //            chats[chatId]?.messages[chats[chatId]?.messages.length - 1].author === AUTHORS.robot
-         
-  //    ){
-  //      return;
-  //    } 
- 
-  //    const timeOut = setTimeout(() => {
- 
-  //      const newMessage = {
-  //        text: 'I am a robot',
-  //        author: AUTHORS.robot,
-  //        id: Date.now(),
-  //      }
-  //      handleSendMessage(newMessage);
- 
-  //    }, 1500);
-     
-  //    return () => clearTimeout(timeOut);
- 
-  //  }, [chats, chatId, handleSendMessage]);
 
-   if (!chats[chatId]) {
-    return (
-    <Redirect to="/nochat" />
-    )};
+  //  if (!!chats[chatId]) {
+  //   return (
+  //   <Redirect to="/nochat" />
+  //   )};
 
   return (
     <div className="Home">
