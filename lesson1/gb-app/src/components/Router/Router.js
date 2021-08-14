@@ -7,22 +7,9 @@ import { AUTHORS } from '../constants';
 import { Chat } from '../Chat/Chat';
 import './Router.css';
 
-const initialChats = {
-    chat1: {
-        messages: [{text: '', author: AUTHORS.human, id: 'chat1-1'}],
-        name: 'Rodion Chat',
-        id: 'chat1',
-},
-    chat2: {
-        messages: [{text: '', author: AUTHORS.human, id: 'chat2-1'}],
-        name: 'Mark Chat',
-        id: 'chat2',
-},
-    chat3: {name: 'Victory Chat', id: 'chat3', messages: []},
-}
 
 export const Router = () => {
-    const [chats, setChats] = useState(initialChats);
+    const [chats, setChats] = useState('');
 
     const handleSendMessage = useCallback((newMessage, chatId) => {
         setChats({
@@ -64,7 +51,7 @@ export const Router = () => {
                     <h2>WELCOME</h2>
                 </Route>
                 <Route path="/nochat">
-                    <NoChat chats={chats}/>
+                    <NoChat/>
                 </Route>
                 <Route path="*">
                     <h2>404</h2>
