@@ -6,6 +6,7 @@ import { Profile } from '../Profile/Profile';
 import { AUTHORS } from '../constants';
 import { Chat } from '../Chat/Chat';
 import './Router.css';
+import { News } from '../News/News';
 
 
 export const Router = () => {
@@ -34,6 +35,9 @@ export const Router = () => {
                 <li className='navItem'>
                     <Link to="/chat">CHAT</Link>
                 </li>
+                <li className='navItem'>
+                    <Link to="/news">NEWS</Link>
+                </li>
             </ul>
 
             <Switch>
@@ -43,6 +47,9 @@ export const Router = () => {
                 </Route>
                 <Route path="/home">
                     <Home/>
+                </Route>
+                <Route path="/news">
+                    <News/>
                 </Route>
                 <Route path="/chat/:chatId?">
                     <Chat chats={chats} onAddMessage={handleSendMessage}/>

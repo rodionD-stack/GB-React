@@ -1,0 +1,16 @@
+body {
+  background-color: #282c34;
+}
+.newsList {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.listItem {
+  border: 2px solid #ccc;
+  background-color: rgb(168, 166, 166);
+  padding: 5px;
+  list-style-type: none;
+  margin: 10px 0;
+}
