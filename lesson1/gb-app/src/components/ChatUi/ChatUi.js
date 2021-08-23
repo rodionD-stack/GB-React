@@ -10,8 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import './ChatUi.css'
 import { Link } from 'react-router-dom';
 import { AddChat } from './AddChat';
-import { DelChat } from './DelChat';
 import { useDispatch } from 'react-redux';
+import { ChatItem } from './ChatItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,20 +25,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const ChatUi = ({ chats }) => {
+export const ChatUi = ({ chats, onDeleteChat, onAddChat }) => {
   const classes = useStyles();
 
   return (
+    <>
     <List className={classes.root}>
       {Object.values(chats).map((c) => (
-        <ListItem alignItems="flex-start" key={c.id}>
-          <Link to={`/chat/${c.id}`}>{c.name}</Link>
-          <DelChat chatId={c.id}/>
-        </ListItem>
+        <ChatItem
+        name={c.name}
+        key={c.key}
+        id={c.id}
+        onDelete={onDeleteChat}/>
       ))}
       <ListItem>
-        <AddChat/>
+        <AddChat onAddChat={onAddChat}/>
       </ListItem>
     </List>
+    </>
   );
-}
+  
+};

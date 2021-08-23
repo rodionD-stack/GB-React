@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addChat } from '../../store/chats/actions';
+import { addChat, addChatWithFB } from '../../store/chats/actions';
+import { useInput } from '../../utils/useInput';
 
 export const AddChat = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+  const [value, handleChange, reset] = useInput("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,12 +15,13 @@ export const AddChat = () => {
       return;
     }
 
-    const newId = `chat-${Date.now()}`;
-    dispatch(addChat(newId, value));
-  };
+    dispatch(addChatWithFB(value));
+    reset();
+
+  }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <input onChange={handleChange} value={value}/>
             <button onClick={handleSubmit}>ADD NEW CHAT</button>
         </form>

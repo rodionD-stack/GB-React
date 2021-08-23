@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Message } from '../../Message';
 import { MessageList } from '../MessageList/MessageList';
 import { Form } from '../Form/Form';
@@ -7,27 +7,41 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { AUTHORS } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { sendMessage, sendMessageWithReply } from '../../store/chats/actions';
+import { connectChatsToFB } from '../../store/chats/actions';
+import { connectMessagesToFB, sendMessageWithFB,
+} from "../../store/messages/action";
 import './Chat.css';
+import firebase from 'firebase';
+import { selectName } from '../../store/profile/selectors';
+import { selectChats } from '../../store/chats/selectors';
+import { selectMessages } from '../../store/messages/selectors';
 
 
-export const Chat = ({ onAddMessage }) => {
+
+export const Chat = () => {
     const someName = 'GeekBrains'
 
   
   const {chatId} = useParams();
-  const  chats = useSelector(state => state.chats);
   const dispatch = useDispatch();
 
-  const handleSendMessage = useCallback((newMessage) => {
-    dispatch(sendMessageWithReply(chatId, newMessage));
-  }, [chatId, onAddMessage]);
- 
+  const chats = useSelector(selectChats);
+  const messages = useSelector(selectMessages);
+  const name = useSelector(selectName);
 
-  //  if (!!chats[chatId]) {
-  //   return (
-  //   <Redirect to="/nochat" />
-  //   )};
+
+  useEffect(() => {
+    dispatch(connectChatsToFB());
+    dispatch(connectMessagesToFB());
+  }, []);
+
+  const handleSendMessage = useCallback(
+    (newMessage) => {
+      dispatch(sendMessageWithFB(chatId, { ...newMessage, author: name }));
+    },
+    [chatId, name, dispatch]
+    );
+
 
   return (
     <div className="Home">
@@ -35,15 +49,15 @@ export const Chat = ({ onAddMessage }) => {
           <Message name={someName}/>
       </header>
       <div className="chat__area">
-          <ChatUi chats={chats} chatId={chatId}/>
-          {!!chatId && (<div className="chat__box">
+          <ChatUi chats={chats}/>
+          {!!chatId && (
+          <div className="chat__box">
               <Form onSendMessage={handleSendMessage} />
               <div className="box__message">
-                <MessageList messages={chats[chatId].messages}/>
+                <MessageList messages={messages[chatId] || []}/>
               </div>
          </div>)}
       </div>  
     </div>
   );
 }
-

@@ -7,7 +7,7 @@ import './Profile.css';
 
 
 export const Profile = () => {
-    const [value, setValue] = useState("");
+  const [value, setValue] = useState("");
   const name = useSelector(selectName);
   const dispatch = useDispatch();
 

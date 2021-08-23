@@ -3,25 +3,36 @@ import { BrowserRouter, Link, Switch, Route, useParams, Redirect } from 'react-r
 import Home from '../Home/Home';
 import { NoChat } from '../NoChat/NoChat';
 import { Profile } from '../Profile/Profile';
-import { AUTHORS } from '../constants';
 import { Chat } from '../Chat/Chat';
 import './Router.css';
 import { News } from '../News/News';
+import { Login } from '../Login/Login';
+import { PublicRoute } from '../../hocs/PublicRoute';
+import { PrivateRoute } from '../../hocs/PrivateRoute';
+import { useDispatch } from 'react-redux';
+import { connectProfileToFB } from '../../store/profile/actions';
+import { Logout } from '../Logout/Logout';
 
 
 export const Router = () => {
-    const [chats, setChats] = useState('');
+    // const [chats, setChats] = useState('');
 
-    const handleSendMessage = useCallback((newMessage, chatId) => {
-        setChats({
-            ...chats,
-            [chatId]: {
-                ...chats[chatId],
-                messages: [...chats[chatId].messages, newMessage]
-            },
-        });
+    // const handleSendMessage = useCallback((newMessage, chatId) => {
+    //     setChats({
+    //         ...chats,
+    //         [chatId]: {
+    //             ...chats[chatId],
+    //             messages: [...chats[chatId].messages, newMessage]
+    //         },
+    //     });
      
-       }, [chats]);
+    //    }, [chats]);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+           dispatch(connectProfileToFB());
+       }, [])
 
     return (
         <BrowserRouter>
@@ -40,29 +51,37 @@ export const Router = () => {
                 </li>
             </ul>
 
+            <Logout/>
+
             <Switch>
-                <Route path="/profile" render={(data) => (
+                <PrivateRoute path="/profile" render={(data) => (
                     <Profile match={data.match}/>
                 )}>
-                </Route>
-                <Route path="/home">
+                </PrivateRoute>
+                <PublicRoute path="/home">
                     <Home/>
-                </Route>
-                <Route path="/news">
+                </PublicRoute>
+                <PublicRoute path="/login">
+                    <Login/>
+                </PublicRoute>
+                <PublicRoute path="/signup">
+                    <Login isSignUp/>
+                </PublicRoute>
+                <PublicRoute path="/news">
                     <News/>
-                </Route>
-                <Route path="/chat/:chatId?">
-                    <Chat chats={chats} onAddMessage={handleSendMessage}/>
-                </Route>
-                <Route path="/" exact>
+                </PublicRoute>
+                <PublicRoute path="/chat/:chatId?">
+                    {/* <Chat chats={chats} onAddMessage={handleSendMessage}/> */}
+                </PublicRoute>
+                <PublicRoute path="/" exact>
                     <h2>WELCOME</h2>
-                </Route>
-                <Route path="/nochat">
+                </PublicRoute>
+                <PrivateRoute path="/nochat">
                     <NoChat/>
-                </Route>
-                <Route path="*">
+                </PrivateRoute>
+                <PublicRoute path="*">
                     <h2>404</h2>
-                </Route>
+                </PublicRoute>
             </Switch>
         </BrowserRouter>
     )
