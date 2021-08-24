@@ -12,11 +12,7 @@ import { PrivateRoute } from '../../hocs/PrivateRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { connectProfileToFB } from '../../store/profile/actions';
 import { Logout } from '../Logout/Logout';
-import { selectChats } from '../../store/chats/selectors';
-import { selectMessages } from '../../store/messages/selectors';
-import { selectName } from '../../store/profile/selectors';
-import { connectMessagesToFB, sendMessageWithFB } from '../../store/messages/action';
-import { connectChatsToFB } from '../../store/chats/actions';
+
 
 
 export const Router = () => {

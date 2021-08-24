@@ -6,7 +6,7 @@ import { useInput } from '../../utils/useInput';
 export const AddChat = () => {
   const dispatch = useDispatch();
 
-  const [value, handleChange, reset] = useInput("");
+  const {value, handleChange, reset} = useInput("");
 
   const handleSubmit = (e) => {
     e.preventDefault();

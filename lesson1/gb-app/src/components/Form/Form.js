@@ -42,7 +42,7 @@ export const Form = ({onSendMessage}) => {
         <form className="forms" onSubmit={handleSubmit} >
             
             <TextField className="chageInput"  id="outlined-basic" inputRef={inputRef} value={value} onChange={handleChange} label="Type message..." variant="outlined" />
-
+          
             <Button style={{marginTop:"20px"}}  type="submit" variant="contained" color="primary">Send</Button>
         </form>
        

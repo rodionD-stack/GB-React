@@ -10,7 +10,7 @@ import { messagesReducer } from "./messages/reducer";
 
 
 const persistConfig = {
-    key: 'GB-messager',
+    key: 'GB-messenger',
     storage,
 }
 
