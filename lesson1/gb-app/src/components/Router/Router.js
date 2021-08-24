@@ -47,27 +47,35 @@ export const Router = () => {
                     <Profile match={data.match}/>
                 )}>
                 </PrivateRoute>
-                <PrivateRoute path="/home/">
+
+                <PublicRoute path="/home/">
                     <Home/>
-                </PrivateRoute>
+                </PublicRoute>
+
                 <PublicRoute path="/login">
                     <Login/>
                 </PublicRoute>
+
                 <PublicRoute path="/signup">
                     <Login isSignUp/>
                 </PublicRoute>
+
                 <Route path="/news">
                     <News/>
                 </Route>
-                <PublicRoute path="/chat/:chatId?">
-                    <Chat chats/>
-                </PublicRoute>
+
+                <PrivateRoute path="/chat/:chatId?">
+                    <Chat/>
+                </PrivateRoute>
+
                 <PublicRoute path="/" exact>
                     <h2>WELCOME</h2>
                 </PublicRoute>
+
                 <PrivateRoute path="/nochat">
                     <NoChat/>
                 </PrivateRoute>
+                
                 <PublicRoute path="*">
                     <h2>404</h2>
                 </PublicRoute>
