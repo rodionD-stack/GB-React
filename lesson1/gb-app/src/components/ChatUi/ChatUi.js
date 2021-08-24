@@ -30,18 +30,19 @@ export const ChatUi = ({ chats, onDeleteChat, onAddChat }) => {
 
   return (
     <>
-    <List className={classes.root}>
-      {Object.values(chats).map((c) => (
-        <ChatItem
-        name={c.name}
-        key={c.key}
-        id={c.id}
-        onDelete={onDeleteChat}/>
-      ))}
-      <ListItem>
-        <AddChat onAddChat={onAddChat}/>
-      </ListItem>
-    </List>
+      <List>
+        {Object.values(chats).map((c) => (
+          <ChatItem
+            name={c.name}
+            key={c.id}
+            id={c.id}
+            onDelete={onDeleteChat}
+          />
+        ))}
+        <ListItem>
+          <AddChat onAddChat={onAddChat} />
+        </ListItem>
+      </List>
     </>
   );
   

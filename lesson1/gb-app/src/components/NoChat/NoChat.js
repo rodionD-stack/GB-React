@@ -4,7 +4,7 @@ import { ChatUi } from "../ChatUi/ChatUi"
 
 export const NoChat = ({chats}) => (
     <>
-    <Chat/>
+    
     <span>Please select a chat</span>
     </>
     )

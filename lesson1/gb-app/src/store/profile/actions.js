@@ -55,7 +55,6 @@ export const loginWithFB = (name, pass) => (dispatch) => {
     try {
       auth.signOut();
     } catch (e) {
-      console.log(e);
       dispatch(setError(e.message));
     }
   };

@@ -6,6 +6,12 @@ import { ChatUi } from '../ChatUi/ChatUi';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { useCallback, useEffect } from 'react';
 import { AUTHORS } from '../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectChats } from '../../store/chats/selectors';
+import { selectMessages } from '../../store/messages/selectors';
+import { selectName } from '../../store/profile/selectors';
+import { connectChatsToFB } from '../../store/chats/actions';
+import { connectMessagesToFB, sendMessageWithFB } from '../../store/messages/action';
 
 
 function Home() {
@@ -22,8 +28,6 @@ function Home() {
     
   </div>
   )
-  
-
  }
 
 export default Home;
