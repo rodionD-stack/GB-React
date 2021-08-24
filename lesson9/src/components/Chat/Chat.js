@@ -22,7 +22,8 @@ export const Chat = () => {
   const someName = 'GeekBrains'
 
   
-  const {chatId} = useParams();
+  const { chatId } = useParams();
+
   const dispatch = useDispatch();
 
   const chats = useSelector(selectChats);
@@ -37,7 +38,8 @@ export const Chat = () => {
 
   const handleSendMessage = useCallback(
     (newMessage) => {
-      dispatch(sendMessageWithFB(chatId, { ...newMessage, author: name }));
+      dispatch(sendMessageWithFB(chatId, 
+        { ...newMessage, author: name }));
     },
     [chatId, name, dispatch]
     );
@@ -54,7 +56,7 @@ export const Chat = () => {
           <div className="chat__box">
               <Form onSendMessage={handleSendMessage} />
               <div className="box__message">
-                <MessageList messages={messages[chatId] || []}/>
+                <MessageList messages={messages[chatId] || []} />
               </div>
          </div>)}
       </div>  

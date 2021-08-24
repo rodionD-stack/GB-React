@@ -16,18 +16,6 @@ import { Logout } from '../Logout/Logout';
 
 
 export const Router = () => {
-    // const [chats, setChats] = useState('');
-
-    // const handleSendMessage = useCallback((newMessage, chatId) => {
-    //     setChats({
-    //         ...chats,
-    //         [chatId]: {
-    //             ...chats[chatId],
-    //             messages: [...chats[chatId].messages, newMessage]
-    //         },
-    //     });
-     
-    //    }, [chats]);
 
     const dispatch = useDispatch();
 
@@ -59,27 +47,35 @@ export const Router = () => {
                     <Profile match={data.match}/>
                 )}>
                 </PrivateRoute>
-                <PrivateRoute path="/home/">
+
+                <PublicRoute path="/home/">
                     <Home/>
-                </PrivateRoute>
+                </PublicRoute>
+
                 <PublicRoute path="/login">
                     <Login/>
                 </PublicRoute>
+
                 <PublicRoute path="/signup">
                     <Login isSignUp/>
                 </PublicRoute>
+
                 <Route path="/news">
                     <News/>
                 </Route>
-                <PublicRoute path="/chat/:chatId?">
+
+                <PrivateRoute path="/chat/:chatId?">
                     <Chat/>
-                </PublicRoute>
+                </PrivateRoute>
+
                 <PublicRoute path="/" exact>
                     <h2>WELCOME</h2>
                 </PublicRoute>
+
                 <PrivateRoute path="/nochat">
                     <NoChat/>
                 </PrivateRoute>
+                
                 <PublicRoute path="*">
                     <h2>404</h2>
                 </PublicRoute>
