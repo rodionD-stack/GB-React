@@ -16,18 +16,6 @@ import { Logout } from '../Logout/Logout';
 
 
 export const Router = () => {
-    // const [chats, setChats] = useState('');
-
-    // const handleSendMessage = useCallback((newMessage, chatId) => {
-    //     setChats({
-    //         ...chats,
-    //         [chatId]: {
-    //             ...chats[chatId],
-    //             messages: [...chats[chatId].messages, newMessage]
-    //         },
-    //     });
-     
-    //    }, [chats]);
 
     const dispatch = useDispatch();
 
@@ -72,7 +60,7 @@ export const Router = () => {
                     <News/>
                 </Route>
                 <PublicRoute path="/chat/:chatId?">
-                    <Chat/>
+                    <Chat chats/>
                 </PublicRoute>
                 <PublicRoute path="/" exact>
                     <h2>WELCOME</h2>
