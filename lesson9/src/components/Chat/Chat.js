@@ -19,7 +19,7 @@ import { selectMessages } from '../../store/messages/selectors';
 
 
 export const Chat = () => {
-    const someName = 'GeekBrains'
+  const someName = 'GeekBrains'
 
   
   const {chatId} = useParams();
