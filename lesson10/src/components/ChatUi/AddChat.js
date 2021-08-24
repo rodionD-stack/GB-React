@@ -1,3 +1,4 @@
+import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addChat, addChatWithFB } from '../../store/chats/actions';
@@ -22,8 +23,9 @@ export const AddChat = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input onChange={handleChange} value={value}/>
-            <button onClick={handleSubmit}>ADD NEW CHAT</button>
+            <TextField id="outlined-basic" label="Type Chat name.." variant="outlined" onChange={handleChange} value={value}/>
+            <br/>
+            <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>ADD NEW CHAT</Button>
         </form>
     )
 }
