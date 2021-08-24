@@ -9,9 +9,14 @@ import { News } from '../News/News';
 import { Login } from '../Login/Login';
 import { PublicRoute } from '../../hocs/PublicRoute';
 import { PrivateRoute } from '../../hocs/PrivateRoute';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { connectProfileToFB } from '../../store/profile/actions';
 import { Logout } from '../Logout/Logout';
+import { selectChats } from '../../store/chats/selectors';
+import { selectMessages } from '../../store/messages/selectors';
+import { selectName } from '../../store/profile/selectors';
+import { connectMessagesToFB, sendMessageWithFB } from '../../store/messages/action';
+import { connectChatsToFB } from '../../store/chats/actions';
 
 
 export const Router = () => {
@@ -58,20 +63,20 @@ export const Router = () => {
                     <Profile match={data.match}/>
                 )}>
                 </PrivateRoute>
-                <PublicRoute path="/home">
+                <PrivateRoute path="/home/">
                     <Home/>
-                </PublicRoute>
+                </PrivateRoute>
                 <PublicRoute path="/login">
                     <Login/>
                 </PublicRoute>
                 <PublicRoute path="/signup">
                     <Login isSignUp/>
                 </PublicRoute>
-                <PublicRoute path="/news">
+                <Route path="/news">
                     <News/>
-                </PublicRoute>
+                </Route>
                 <PublicRoute path="/chat/:chatId?">
-                    {/* <Chat chats={chats} onAddMessage={handleSendMessage}/> */}
+                    <Chat/>
                 </PublicRoute>
                 <PublicRoute path="/" exact>
                     <h2>WELCOME</h2>

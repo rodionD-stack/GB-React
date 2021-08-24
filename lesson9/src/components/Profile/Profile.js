@@ -26,6 +26,7 @@ export const Profile = () => {
       <h2 className="profile__heading">THIS IS PROFILE OF <span className="heading__name">{name}</span></h2>
       <form className="forms" action="" onSubmit={handleSubmit}>
         <TextField value={value} onChange={handleChange} id="outlined-basic" label="Type name..." variant="outlined" />
+        
         <Button style={{marginTop:"20px"}} onClick={handleSubmit} variant="contained" color="primary">Save name</Button>
       </form>
     </div>

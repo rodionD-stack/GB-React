@@ -4,8 +4,7 @@ import { ADD_CHAT, DELETE_CHAT, SEND_MESSAGE, SET_CHATS, SET_ERROR } from './act
 const initialState = {
     chats: [],
     error: null,
-
-};
+  };
 
 export const chatsReducer = (state = initialState, {type, payload}) => {
     switch (type) {
